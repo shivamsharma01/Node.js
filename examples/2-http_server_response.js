@@ -8,6 +8,7 @@ var server = http.createServer(function (request, response) {
         </body>
     </html>
     `);
+    response.end();
 });
 server.listen('3000');
 console.log('Server started, listening to port 3000');
