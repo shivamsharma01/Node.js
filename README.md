@@ -13,7 +13,3 @@ Learn To
 ♦ Scale a node application and choose appropriate Node.js module for the same
 ♦ Debug a node application
 ♦ Work with Node Package Manager
-
-
-
-
