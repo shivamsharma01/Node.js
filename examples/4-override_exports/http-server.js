@@ -1,7 +1,7 @@
 var http = require('http');
 var module = require('./DBModule');
 var server = http.createServer(function(request,response) {
-    result = module.authenticateUser('admin','password');
+    result = module('admin','password');
     response.writeHead(200,{'content-type': 'text/html'});
     response.write(`
     <html>
