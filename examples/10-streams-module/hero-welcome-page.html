@@ -4,8 +4,9 @@
     <title>Login Page</title>
     <style>
         table,th,td {
-            border: 1px solid black;
+            border: 1px solid white;
             border-collapse: collapse;
+            color: white;
         }
         th,td {
             padding: 5px;
@@ -14,28 +15,32 @@
     </style>
 </head>
 
-<body background="../../assets/welcome-page.jpg" text="white">
+<body background="../../assets/welcome-page.jpg" text="black">
     <center>
-        <h2>Hero Directory</h2>
-        <table style="width:100%">
+        <h1>Hero Directory</h1>
+        <table style="width:100%; background-color: black;">
             <tr>
               <th>Hero</th>
               <th colspan="2">Details</th>
+              <th>Download</th>
             </tr>
             <tr>
               <td><a href="http://localhost:3000/heroes/?hero=saitama">Saitama</a></td>
               <td>B-Class</td>
               <td>Immeasurable Physical Prowess</td>
+              <td><a href="http://localhost:3000/download/?hero=saitama">Download</a></td>
             </tr>
             <tr>
               <td><a href="http://localhost:3000/heroes/?hero=genos">Genos</a></td>
               <td>S-Class</td>
               <td>Cyborg Body</td>
+              <td><a href="http://localhost:3000/download/?hero=genos">Download</a></td>
             </tr>
             <tr>
               <td><a href="http://localhost:3000/heroes/?hero=tatsumaki">Tatsumaki</a></td>
               <td>S-Class</td>
               <td>Psychokinesis</td>
+              <td><a href="http://localhost:3000/download/?hero=tatsumaki">Download</a></td>
             </tr>
         </table>
     </center>

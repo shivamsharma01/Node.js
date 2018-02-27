@@ -15,6 +15,8 @@ exports.enableRoute = function (url, request, response) {
             break;
         case '/heroes/': routeHandler.view_hero(request, response);
             break;
+        case '/download/': routeHandler.download_hero(request, response);
+            break;
         default: routeHandler.first_page(request, response);
     }
 }

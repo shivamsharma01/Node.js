@@ -2,6 +2,7 @@ var module = require('./DBModule');
 var url = require('url');
 var querystring = require('querystring');
 var fs = require('fs');
+var zlib = require('zlib');
 
 exports.display_login = function (request, response) {
     data1 = '';
@@ -74,48 +75,42 @@ exports.display_register = function (request, response) {
                     throw err;
                 }
             });
-            response.writeHead(200, { 'Content-Type': 'text/html' });
-            fs.readFile('./user.txt', function (err, text) {
-                if (err) {
-                    throw err;
-                }
-            });
             response.writeHeader(200, { "Content-Type": "text/html" });
-            response.write(text);
+            response.write(`<h1>Successfully Registered</h1>`);
             response.end();
         } else {
             response.writeHead(200, { 'Content-Type': 'text/html' });
-            response.write("<h2>password and confirm password did not match</h2>");
+            response.write("<h2>Password does not match with confirm password!!</h2>");
             response.end();
         }
     });
 };
 
-exports.view_hero = function(request, response) {
+exports.view_hero = function (request, response) {
     query = url.parse(request.url).query;
     hero = querystring.parse(query)['hero'];
-    var image = fs.createReadStream('../../assets/'+hero+'.jpg');
+    var image = fs.createReadStream('../../assets/' + hero + '.jpg');
     image.on('open', function () {
-        response.writeHead(200,'Content-Type', 'image/jpeg');
+        response.writeHead(200, 'Content-Type', 'image/jpeg');
         image.pipe(response);
     });
     image.on('error', function () {
-        response.writeHead(404,'Content-Type', 'text/plain');
+        response.writeHead(404, 'Content-Type', 'text/plain');
         response.end('Not found');
     });
 }
-
-
-exports.view_hero = function(request, response) {
+exports.download_hero = function (request, response) {
     query = url.parse(request.url).query;
     hero = querystring.parse(query)['hero'];
-    var image = fs.createReadStream('../../assets/'+hero+'.jpg');
-    image.on('open', function () {
-        response.writeHead(200,'Content-Type', 'image/jpeg');
-        image.pipe(response);
+    var image = fs.createReadStream('../../assets/' + hero + '.jpg');
+    var dir = "D://heroes//";
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+    wstream = fs.createWriteStream(dir + hero + ".gz");
+    var gzip = zlib.createGzip();
+    image.pipe(gzip).pipe(wstream).on('finish', function () {
+        console.log('Finished compressing');
+        response.end();
     });
-    image.on('error', function () {
-        response.writeHead(404,'Content-Type', 'text/plain');
-        response.end('Not found');
-    });
-}
+} 
